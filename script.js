@@ -1,43 +1,60 @@
-let squarelist = document.querySelectorAll(".content");
-let body = document.getElementById("body");
-let test = document.getElementById("container");
-let place = 0;
-let change = 0;
+let scrollLand = document.getElementById('render-3d');
 
+//base de la transformation du render-3d et des chunk 
+let base3dScroll = "rotateX(45deg) rotateY(0deg) rotateZ(10deg) skewX(-25deg) skewY(10deg)";
+//valeur initial du scrolling
+let scrollPositionX = 0;
+let scrollPositionY = 0;
+
+let generateChunk = 4; /*clef identité chunk*/
+let gateChunk = 4 /*vérifie si il n'y a pas déja suffissament de chunk*/
+let nextBotRightGen = -160; /*pour l'instant ajoute un chuck quand on ArrowDown il sera necessaire d'en faire 4 version */
+let removedChunck = 0;
+
+// base du code HTML des chunk, sans l'entete qu'on rajoute ensuite dans changementchunk, pour y mettre leur id.
+let chunkHTML = "";
+for(i=0; i<=48; i++){
+    console.log(i);
+    chunkHTML += '<div class="content"></div>';
+    if(i == 48){
+       chunkHTML += '</div>';
+    }
+};
+
+//commande, a retravaillé vis a vis des saccades
 body.addEventListener('keydown', move);
 function move(event){
     let key = event.code;
     if (key == "ArrowDown"){
-        if ((place != 15)&&(place != 16)&&(place != 17)&&(place != 18)&&(place != 19)){
-            squarelist[place].innerHTML = "";
-            place += 5;   
-            squarelist[place].innerHTML = '<div class="persona"></div>';
-        }
+        scrollPositionY -= 10;
     }
     if (key == "ArrowUp"){
-        if(place -5 >= 0){
-            squarelist[place].innerHTML = "";
-            place -= 5; 
-            squarelist[place].innerHTML = '<div class="persona"></div>';
-        }
+        scrollPositionY += 10;
     }
     if (key == "ArrowLeft"){
-        if ((place != 0)&&(place != 5)&&(place != 10)&&(place != 15)){
-            squarelist[place].innerHTML = "";
-            place -= 1; 
-            squarelist[place].innerHTML = '<div class="persona"></div>';
-        }
+        scrollPositionX += 10;
     }
     if (key == "ArrowRight") {
-        if ((place != 4)&&(place != 9)&&(place != 14)&&(place != 19)){
-            squarelist[place].innerHTML = "";
-            place += 1; console.log(place);
-            squarelist[place].innerHTML = '<div class="persona"></div>';
+        scrollPositionX -= 10;
+    }
+    scrollLand.style.transform = base3dScroll + "translate("+ scrollPositionX + "px, " + scrollPositionY + "px)"; 
+}
+
+function changementChunk(){
+    //pour la génération en bas a droite
+    if ((scrollPositionY <= nextBotRightGen)&&(generateChunk==gateChunk)){
+        for(i=0; i<=1; i++){
+            generateChunk ++;
+            gateChunk ++;
+            scrollLand.innerHTML += '<div id="chunk-' + generateChunk + '" class="chunk">' + chunkHTML;
+        }
+       nextBotRightGen = nextBotRightGen + (-630); 
+    }
+    if ((scrollPositionY <= -495)&&(removedChunck <= 2)){
+        for(i=0; i<=1; i++){
+            let forgotedChunk = document.getElementById("chunk-"+(i+1));
         }
     }
-    if (key == "Space") {
-        change += 5;
-        console.log(change);
-        test.style.transform = 'scaleX(1.8) scaleY(1.5) scaleZ(2.1) rotateX(47deg) rotateY(-8deg) rotateZ(28deg) translateX(' + change + 'px) translateY(-1px) translateZ(0px) skewX(-26deg) skewY(10deg)';
-    }
 }
+
+let tcheckChunk = setInterval(changementChunk, 20);

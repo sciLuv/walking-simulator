@@ -2,31 +2,63 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
+  margin-top: 150px;
+  overflow: hidden;
 }
 
-.container {
-  width: 110px;
+#border-game {
+  border: black solid 2px;
+  width: 630px;
+  min-width: 630px;
+  max-width: 630px;
+  height: 630px;
+  min-height: 630px;
+  max-width: 630px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#render-3d {
+  border: brown 2px solid;
   display: flex;
   flex-wrap: wrap;
-  background-color: rgba(255, 0, 0, 0.274);
-  transform: scaleX(1.8) scaleY(1.5) scaleZ(2.1) rotateX(47deg) rotateY(-8deg) rotateZ(28deg) translateX(0px) translateY(-1px) translateZ(0px) skewX(-26deg) skewY(10deg);
-}
-.container .content {
-  height: 20px;
-  width: 20px;
-  background-color: rgba(0, 255, 136, 0.274);
-  margin: 1px;
-}
-.container .content .persona {
-  width: 100%;
-  height: 100%;
-  background-color: wheat;
-  border-radius: 50px;
   position: relative;
-  left: -15px;
-  top: -10px;
-  box-shadow: 15px 10px 0px 0px #d1b581;
+  top: 20px;
+  transform: rotateX(45deg) rotateY(0deg) rotateZ(10deg) skewX(-25deg) skewY(10deg);
+  width: 1260px;
+  min-width: 1260px;
+  max-width: 1260px;
+  height: 1260px;
+  min-height: 1260px;
+  max-width: 1260px;
+}
+
+.chunk {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 0;
+  width: 630px;
+  min-width: 630px;
+  max-width: 630px;
+  height: 630px;
+  min-height: 630px;
+  max-width: 630px;
+  background-color: rgba(255, 0, 0, 0.274);
+}
+.chunk:nth-child(2n) {
+  background-color: rgba(102, 255, 0, 0.13);
+}
+.chunk .content {
+  height: 90px;
+  width: 90px;
+}
+.chunk .content:nth-child(2n) {
+  background-color: rgba(0, 0, 255, 0.39);
+}
+.chunk .content:nth-child(3n) {
+  background-color: rgba(238, 255, 0, 0.336);
 }
 
 /*# sourceMappingURL=style.css.map */

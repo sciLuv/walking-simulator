@@ -35,3 +35,37 @@ function loop(){
         position.html.x -= 20;
         position.inGame.x -= 20;
     }
+
+    function loop(){
+    if (keyState.up == true){
+        position.html.y += 5;
+        position.inGame.y += 5;
+    }
+    if (keyState.down == true){
+        position.html.y -= 5;
+        position.inGame.y -= 5;
+    }
+    if (keyState.left == true){
+        position.html.x += 5;
+        position.inGame.x += 5;
+    }
+    if (keyState.right == true) {
+        position.html.x -= 5;
+        position.inGame.x -= 5;
+    }
+
+    function chunk(num, color){
+    this.num = num;
+    this.color = color;
+}
+/*class chunks {
+    constructor(num, color){
+        this.num = num;
+        this.color = color;       
+    }
+}*/
+let chunk1 = new chunk(1, "green");
+
+let chunks  = {
+
+}

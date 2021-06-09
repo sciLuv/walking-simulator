@@ -1,0 +1,36 @@
+
+
+.chunk{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 0;
+    opacity: 0.8;
+
+    width: 630px; min-width: 630px; max-width: 630px;
+    height: 630px; min-height: 630px; max-width: 630px;
+
+    .content{
+        height: 90px;
+        width: 90px;
+        &:nth-child(2n){
+            background-color: rgba(34, 34, 34, 0.068);
+        }
+        &:nth-child(3n){
+            background-color: rgba(236, 236, 236, 0.151);
+        }
+        &:nth-child(4n){
+            opacity: 0.9;
+        }
+    }
+}
+
+.chunk-green-1{
+    background-color: var(--color-weed-1);
+}
+.chunk-green-2{
+    background-color: var(--color-weed-2);
+}
+.chunk-green-3{
+    background-color: var(--color-weed-3);
+}

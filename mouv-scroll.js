@@ -1,27 +1,6 @@
-//genere les premiers chunks 
-let scrollLand = document.getElementById('render-3d');
-scrollLand.innerHTML = '';
-let chunkID = 5; /*genere clef identité chunk*/
+//SCROOLING, APPARITION/DISPARITION DES CHUNKS ET MOUVEMENT
 
-// base du code HTML des chunk, sans l'entete qu'on rajoute ensuite dans la boucle suivante et changementchunk, pour y mettre leur id.
-let chunkHTML = "";
-for(i=0; i<=48; i++){
-    chunkHTML += '<div class="content"></div>';
-    if(i == 48){
-       chunkHTML += '</div>';
-    }
-};
-
-/*representation dans un tableau des chunk, pour recrée le dom a chaque ajout*/
-let actualChunksRepro = [1, 2, 3, 4]; 
-//création des premiers chunks
-for( i = 0; i < actualChunksRepro.length; i++){
-    scrollLand.innerHTML += '<div id="chunk-' + actualChunksRepro[i] + '" class="chunk">' + chunkHTML;
-}
-
-
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~SCROLLING / AFFICHAGE DES CHUNCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 //base de la transformation du render-3d et des chunk 
 let base3dScroll = "rotateX(45deg) rotateY(0deg) rotateZ(10deg) skewX(-25deg) skewY(10deg)";
@@ -31,15 +10,6 @@ let position = {
     inGame : {x: 0, y: 0},
     html : {x: 0, y: 0}
 }
-
-/*état des touche initial*/
-let keyState = { 
-    up : false, 
-    down : false, 
-    left : false, 
-    right : false
-};
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CHARGEMENT DES CHUNCK~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 let XGenLeft = 40;
 let XSupLeft = -580;
@@ -56,13 +26,7 @@ let YSupTop = -495;
 /* vérifie les dimension de largeur du render 3d html, pour le scrolling horizontal */
 let BigScrollLand;
 
-
-function genActualChunk(){
-    scrollLand.innerHTML = '';
-    for( i = 0; i < actualChunksRepro.length; i++){
-        scrollLand.innerHTML += '<div id="chunk-' + actualChunksRepro[i] + '" class="chunk">' + chunkHTML;
-    }
-}
+/* changement de la largeur du render 3d en fonction de l'affichage des chunks */
 function changeWidthScrollLand(){
     if (BigScrollLand == true){
         scrollLand.style.width = "1890px";
@@ -193,11 +157,20 @@ function changementChunk(){
         }
 }
 
-let tcheckChunk = setInterval(changementChunk, 200);
+let checkChunk = setInterval(changementChunk, 200);
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~MOUVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+/*état des touche initial*/
+let keyState = { 
+    up : false, 
+    down : false, 
+    left : false, 
+    right : false
+};
+
 //vérification de l'état des touches
-function loop(){
+function verifControlLoop(){
     if (keyState.up == true){
         position.html.y += 20;
         position.inGame.y += 20;
@@ -216,6 +189,8 @@ function loop(){
     }
     scrollLand.style.transform = base3dScroll + "translate("+ position.html.x + "px, " + position.html.y + "px)"; 
 }
+
+/*écoute du clavier */
 body.addEventListener('keydown', move);
 function move (event){
   let key = event.key;
@@ -254,28 +229,6 @@ function stopMove (event){
   }
 }
 
-let gameLoop = setInterval(loop, 50);
+let gameLoop = setInterval(verifControlLoop, 50);
 
 
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~DEBUG COMMAND~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-body.addEventListener('keyup', stop);
-function stop (event){
-    let key = event.key;
-    if(key == ('1')){
-        clearInterval(gameLoop);
-    }
-    if(key == ('2')){
-    console.log("Y : HTML " + position.html.y + ", INGAME " + position.inGame.y);
-    console.log("X : HTML " + position.html.x + ", INGAME" + position.inGame.x);
-    }
-    if(key == ('3')){
-        console.log('tableau représentation chunk ' + actualChunksRepro);
-        console.log(scrollLand.childNodes);
-    }
-    if(key == ('4')){
-        console.log('YGenBot ' + YGenBot);
-        console.log('YGenTop ' + YGenTop);
-        console.log('YSupTop ' + YSupTop);
-        console.log('YSupBot ' + YSupBot);
-    }
-}

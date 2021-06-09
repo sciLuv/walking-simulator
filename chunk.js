@@ -17,20 +17,11 @@ for(i=0; i<=48; i++){
 
 //création chunks
 let chunkList = [];
-function cutChunkList(){
-    if(chunkList.length > 4){
-        while(chunkList.length !== actualChunksRepro.length){
-            chunkList.shift();
-            console.log(actualChunkRepro);
-            console.log(chunkList);
-        }
-    }
-}
+
 
 function genActualChunk(){
     scrollLand.innerHTML = '';
     for( i = 0; i < actualChunksRepro.length; i++){
-        cutChunkList();
         let chunkInGenColor = chunkColor();
         scrollLand.innerHTML += '<div id="chunk-' + actualChunksRepro[i] + '" class="chunk">' + chunkHTML;
         let chunk = document.getElementById("chunk-" + actualChunksRepro[i]);

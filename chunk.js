@@ -18,7 +18,6 @@ for(i=0; i<=48; i++){
 //création chunks
 let chunkList = [];
 
-
 function genActualChunk(){
     scrollLand.innerHTML = '';
     for( i = 0; i < actualChunksRepro.length; i++){

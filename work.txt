@@ -1,0 +1,37 @@
+    
+    supprimer en allant vers la droite
+
+            for( i = 0; i < 2; i++){
+                actualChunksRepro.splice(i, 1);
+                chunkID++
+            }
+
+        //generation xleft
+        if ((position.inGame.x >= XGenLeft)){
+            console.log(actualChunksRepro);
+            for( i = 0; i < 2; i++){
+                actualChunksRepro.splice(i, 1);
+                chunkID++
+            }
+            genActualChunk();
+            
+        }
+
+Vitesse défilement jeu plus lente : 
+function loop(){
+    if (keyState.up == true){
+        position.html.y += 20;
+        position.inGame.y += 20;
+    }
+    if (keyState.down == true){
+        position.html.y -= 20;
+        position.inGame.y -= 20;
+    }
+    if (keyState.left == true){
+        position.html.x += 20;
+        position.inGame.x += 20;
+    }
+    if (keyState.right == true) {
+        position.html.x -= 20;
+        position.inGame.x -= 20;
+    }

@@ -2,7 +2,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 150px;
+  margin-top: 200px;
   overflow: hidden;
 }
 
@@ -45,7 +45,7 @@ body {
   height: 630px;
   min-height: 630px;
   max-width: 630px;
-  background-color: rgba(255, 0, 0, 0.274);
+  background-color: rgba(85, 136, 116, 0.274);
 }
 .chunk:nth-child(2n) {
   background-color: rgba(102, 255, 0, 0.13);
@@ -55,10 +55,13 @@ body {
   width: 90px;
 }
 .chunk .content:nth-child(2n) {
-  background-color: rgba(0, 0, 255, 0.39);
+  background-color: rgba(39, 138, 0, 0.39);
 }
 .chunk .content:nth-child(3n) {
-  background-color: rgba(238, 255, 0, 0.336);
+  background-color: rgba(11, 126, 82, 0.336);
+}
+.chunk .content:nth-child(4n) {
+  background-color: rgba(155, 189, 75, 0.336);
 }
 
 /*# sourceMappingURL=style.css.map */

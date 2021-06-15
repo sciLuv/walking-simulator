@@ -2,15 +2,30 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 200px;
     overflow: hidden;
+    margin: 0px;
 }
 #border-game{
-    border: black solid 2px;
     width: 630px; min-width: 630px; max-width: 630px;
     height: 630px; min-height: 630px; max-width: 630px;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    position: relative;
+    z-index: 10;
+}
+.side{
+    background-color: rgba(0, 0, 0, 0.74);
+    position: relative;
+    z-index: 100;
+    width: 100%;
+}
+.side-vertical{
+    height: 1030px;
+}
+#side-top{
+    height: 200px;
+}
+#side-bottom{
+    height: 200px;
 }

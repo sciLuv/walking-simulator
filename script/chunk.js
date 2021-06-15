@@ -23,6 +23,7 @@ function genActualChunk(){
     for( i = 0; i < actualChunksRepro.length; i++){
         let chunkInGenColor = chunkColor();
         let chunkInGenWeed = chunkWeed();
+        let chunkInGenTree = chunkTree();
 
         scrollLand.innerHTML += '<div id="chunk-' + actualChunksRepro[i] + '" class="chunk">' + chunkHTML;
         let chunk = document.getElementById("chunk-" + actualChunksRepro[i]);
@@ -37,14 +38,20 @@ function genActualChunk(){
                 for(k=0; k<= chunkList[actualChunksRepro[i]].weed.length-1; k++){
                     chunk.childNodes[chunkList[actualChunksRepro[i]].weed[k]].innerHTML = '<div class="weed"></div>';
                 }
+                if(chunkList[actualChunksRepro[i]].tree != -1){
+                    chunk.childNodes[chunkList[actualChunksRepro[i]].tree].innerHTML = '<div class="tree"></div><div class="tree-2"></div>';
+                }
             }
         }
         else{
         //chunk.childNodes[5].style.backgroundColor = "red"; fonctionne, pour des info sur les childnodes
         chunk.className += chunkInGenColor;
-        chunkList[actualChunksRepro[i]] = { num : actualChunksRepro[i], color : chunkInGenColor, weed : chunkInGenWeed};
+        chunkList[actualChunksRepro[i]] = { num : actualChunksRepro[i], color : chunkInGenColor, weed : chunkInGenWeed, tree: chunkInGenTree};
             for(k=0; k<= chunkList[actualChunksRepro[i]].weed.length-1; k++){
                 chunk.childNodes[chunkList[actualChunksRepro[i]].weed[k]].innerHTML = '<div class="weed"></div>';
+            }
+            if(chunkList[actualChunksRepro[i]].tree != -1){
+                chunk.childNodes[chunkList[actualChunksRepro[i]].tree].innerHTML = '<div class="tree"></div><div class="tree-2"></div>';
             }
         }
     }
@@ -82,4 +89,13 @@ function chunkWeed(){
         }
     }
     return weedChoice;
+}
+function chunkTree(){
+    let treeChoice = -1;
+        let treeOrNot =  Math.ceil(Math.random()*10000);
+        if (treeOrNot >= 5000){
+            let whereIsTree = Math.ceil(Math.random()*48);
+            treeChoice = whereIsTree;
+        }
+    return treeChoice;
 }

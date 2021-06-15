@@ -187,7 +187,7 @@ function verifControlLoop(){
         position.html.x -= 20;
         position.inGame.x -= 20;
     }
-    scrollLand.style.transform = base3dScroll + "translate("+ position.html.x + "px, " + position.html.y + "px)"; 
+    scrollLand.style.transform = base3dScroll + "translate("+ position.html.x + "px, " + position.html.y + "px)";
 }
 
 /*écoute du clavier */

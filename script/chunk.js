@@ -22,25 +22,37 @@ function genActualChunk(){
     scrollLand.innerHTML = '';
     for( i = 0; i < actualChunksRepro.length; i++){
         let chunkInGenColor = chunkColor();
+        let chunkInGenWeed = chunkWeed();
+
         scrollLand.innerHTML += '<div id="chunk-' + actualChunksRepro[i] + '" class="chunk">' + chunkHTML;
         let chunk = document.getElementById("chunk-" + actualChunksRepro[i]);
+        console.log(chunk);
 
     
         if((chunkList[actualChunksRepro[i]]) != undefined ){
             if ((chunkList[actualChunksRepro[i]].num) == actualChunksRepro[i]){
-                console.log('test');
+
                 chunk.className += chunkList[actualChunksRepro[i]].color;
+                
+                for(k=0; k<= chunkList[actualChunksRepro[i]].weed.length-1; k++){
+                    chunk.childNodes[chunkList[actualChunksRepro[i]].weed[k]].innerHTML = '<div class="weed"></div>';
+                }
             }
         }
         else{
         //chunk.childNodes[5].style.backgroundColor = "red"; fonctionne, pour des info sur les childnodes
         chunk.className += chunkInGenColor;
-        chunkList[actualChunksRepro[i]] = { num : actualChunksRepro[i], color : chunkInGenColor};
+        chunkList[actualChunksRepro[i]] = { num : actualChunksRepro[i], color : chunkInGenColor, weed : chunkInGenWeed};
+            for(k=0; k<= chunkList[actualChunksRepro[i]].weed.length-1; k++){
+                chunk.childNodes[chunkList[actualChunksRepro[i]].weed[k]].innerHTML = '<div class="weed"></div>';
+            }
         }
     }
 }
 
-genActualChunk();
+for(i= 0; i<2; i++){
+    genActualChunk();
+}
 
 function randomNum(){
     let random = Math.ceil(Math.random()*10000);
@@ -59,4 +71,15 @@ function chunkColor(){
         colorChoice = " chunk-green-3";
     }
     return colorChoice;
+}
+function chunkWeed(){
+    let weedChoice = [] ;
+    for (j = 0; j <= 5;  j++){
+        let weedOrNot =  Math.ceil(Math.random()*10000);
+        if (weedOrNot >= 5000){
+            let whereIsWeed = Math.ceil(Math.random()*48);
+            weedChoice.push(whereIsWeed);
+        }
+    }
+    return weedChoice;
 }

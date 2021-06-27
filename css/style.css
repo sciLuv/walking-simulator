@@ -10,6 +10,7 @@ body {
   justify-content: center;
   overflow: hidden;
   margin: 0px;
+  background-color: black;
 }
 
 #border-game {
@@ -27,22 +28,36 @@ body {
 }
 
 .side {
-  background-color: rgba(0, 0, 0, 0.74);
+  background-color: black;
   position: relative;
   z-index: 100;
   width: 100%;
 }
 
 .side-vertical {
-  height: 1030px;
+  height: 1800px;
+}
+
+#center-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
 }
 
 #side-top {
-  height: 200px;
+  height: 170px;
+  color: white;
+  text-align: center;
+}
+#side-top span {
+  display: inline-block;
+  margin-top: 50px;
 }
 
 #side-bottom {
-  height: 200px;
+  height: 1000px;
 }
 
 #render-3d {
@@ -100,16 +115,6 @@ body {
   background-color: var(--color-weed-3);
 }
 
-.weed-2 {
-  height: 100%;
-  width: 100%;
-  background-image: url(../image/weed2.png);
-  background-size: contain;
-  position: relative;
-  z-index: 1;
-  transform: scaleX(0.4) scaleY(1.2) scaleZ(1) rotateX(-15deg) rotateY(0deg) rotateZ(0deg) translateX(-100px) translateY(-125px) translateZ(10px) skewX(65deg) skewY(40deg);
-}
-
 .weed {
   height: 100%;
   width: 100%;
@@ -118,6 +123,16 @@ body {
   position: relative;
   z-index: -1;
   transform: scaleX(1.3) scaleY(1.5) scaleZ(0.1) rotateX(-20deg) rotateY(-35deg) rotateZ(-30deg) translateX(15px) translateY(-40px) translateZ(35px) skewX(20deg) skewY(-10deg);
+}
+
+.weed-2 {
+  height: 100%;
+  width: 100%;
+  background-image: url(../image/weed2.png);
+  background-size: contain;
+  position: relative;
+  z-index: 1;
+  transform: scaleX(0.4) scaleY(1.2) scaleZ(1) rotateX(-15deg) rotateY(0deg) rotateZ(0deg) translateX(-100px) translateY(-125px) translateZ(10px) skewX(65deg) skewY(40deg);
 }
 
 .tree {

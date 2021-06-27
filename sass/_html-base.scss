@@ -4,6 +4,7 @@ body{
     justify-content: center;
     overflow: hidden;
     margin: 0px;
+    background-color: rgb(0, 0, 0);
 }
 #border-game{
     width: 630px; min-width: 630px; max-width: 630px;
@@ -15,17 +16,30 @@ body{
     z-index: 10;
 }
 .side{
-    background-color: rgba(0, 0, 0, 0.74);
+    background-color: rgb(0, 0, 0);
     position: relative;
     z-index: 100;
     width: 100%;
 }
 .side-vertical{
-    height: 1030px;
+    height: 1800px;
+}
+#center-game{
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start;   
+ align-items: flex-start;
+ height: 100%;
 }
 #side-top{
-    height: 200px;
+    height: 170px;
+    color: white;
+    text-align: center;
+    span{
+        display: inline-block;
+        margin-top: 50px;
+    }
 }
 #side-bottom{
-    height: 200px;
+    height: 1000px;
 }

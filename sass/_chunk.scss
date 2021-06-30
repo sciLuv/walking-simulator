@@ -1,0 +1,46 @@
+
+
+.chunk{
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: -1;
+
+    width: 630px; min-width: 630px; max-width: 630px;
+    height: 630px; min-height: 630px; max-height: 630px;
+
+    @include littleDevice {
+        width: 315px; min-width: 315px; max-width: 315px;
+        height: 315px; min-height: 315px; max-height: 315px;
+    }
+
+    .content{
+        height: 90px;
+        width: 90px;
+        @include littleDevice {
+            height: 45px;
+            width: 45px;
+        }
+        position: relative;
+        z-index: -1;
+        &:nth-child(2n){
+            background-color: rgba(34, 34, 34, 0.068);
+        }
+        &:nth-child(3n){
+            background-color: rgba(236, 236, 236, 0.151);
+        }
+        &:nth-child(4n){
+            opacity: 1;
+        }
+    }
+}
+
+.chunk-green-1{
+    background-color: var(--color-weed-1);
+}
+.chunk-green-2{
+    background-color: var(--color-weed-2);
+}
+.chunk-green-3{
+    background-color: var(--color-weed-3);
+}

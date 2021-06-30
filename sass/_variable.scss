@@ -1,0 +1,14 @@
+body{
+    --color-weed-1 : #64b482;
+    --color-weed-2 : #5fa34f;
+    --color-weed-3 : #8aa34f;
+}
+
+
+
+
+@mixin littleDevice(){
+    @media(max-width : 635px){
+    @content;
+    }
+}

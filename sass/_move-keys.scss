@@ -1,0 +1,61 @@
+.move{
+    width : 200px;
+    height: 150px;
+    .move-btn{
+        background-color: rgb(195, 195, 195);
+        width: 50px;
+        height: 50px;
+        border-radius: 10px 10px 10px 10px;
+        cursor: pointer;
+        user-select: none;
+        &:hover{
+            background-color: rgb(255, 255, 255);  
+        }
+        img{
+            width: 50px;
+            height: 50px;
+            position: relative;
+            z-index:-1;
+        }
+    }
+    #top{
+        position: relative;
+        left: 75px;
+        clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 30% 100%, 0% 70%);
+        &:active img{
+            left: 1px;
+            top: -10px;
+        }
+    }
+    #left{
+        position: relative;
+        left: 35px;
+        top: -10px;
+        clip-path: polygon(70% 0%, 100% 30%, 100% 70%, 70% 100%, 0 100%, 0 0);
+        &:active img{
+            left: -10px;
+            top: -1px;
+        }
+    }
+    #right{
+        position : relative;
+        left: 115px;
+        top: -60px;
+        clip-path: polygon(30% 0%, 100% 0, 100% 100%, 30% 100%, 0% 70%, 0% 30%);
+        &:active img{
+            left: 10px;
+            top: 1px;
+        }
+    }
+    #bottom{
+        position: relative;
+        left: 75px;
+        top: -70px;
+        clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 100%, 0 100%, 0% 30%);
+        &:active img{
+            left: -1px;
+            top: 10px;
+        }
+    }
+    transform: rotate(45deg);
+}

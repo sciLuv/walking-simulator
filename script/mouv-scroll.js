@@ -16,19 +16,75 @@ let position = {
     html : {x: 0, y: 0}
 }
 
-let XGenLeft = 40;
-let XSupLeft = -580;
+let XGenLeft, XSupLeft, XGenRight, XSupRight; 
+let YGenBot, YSupBot, YGenTop, YSupTop; 
 
-let XGenRight = -80;
-let XSupRight = 555;
+let resetScroll;
 
-let YGenBot = -165;
-let YSupBot = 470;
+let scrollLandWidth1, scrollLandWidth2 = 1260;
 
-let YGenTop = 115;
-let YSupTop = -495;
+let AbsolutYSupBotScroll, AbsolutYGenTopScroll, AbsolutYSupTopScroll;
+let AbsolutXGenRightScroll, AbsolutXSupRightScroll, AbsolutXGenLeftScroll, AbsolutXSupLeftScroll;
 
-let resetScroll = 630;
+function screenSize(){
+    let actualScreen = window.screen.width;
+    console.log(actualScreen);
+    if(actualScreen <= 635){
+        XGenLeft = 14;
+        XSupLeft = -580;
+        
+        XGenRight = -48;
+        XSupRight = 610;
+        
+        YGenBot = -93;
+        YSupBot = 588;
+        
+        YGenTop = 45;
+        YSupTop = -533; 
+
+        scrollLandWidth1 = 945;
+        scrollLandWidth2 = 630;
+
+        AbsolutYSupBotScroll = -82.5;
+        AbsolutYGenTopScroll = -247,5;
+        AbsolutYSupTopScroll = 56;
+
+        AbsolutXGenRightScroll = 105;
+        AbsolutXSupRightScroll = -35;
+        AbsolutXGenLeftScroll = -132.5;
+        AbsolutXSupLeftScroll = 20;
+
+        resetScroll = 315;
+    }
+    else{
+        XGenLeft = 40;
+        XSupLeft = -580;
+
+        XGenRight = -80;
+        XSupRight = 555;
+
+        YGenBot = -165;
+        YSupBot = 470;
+
+        YGenTop = 115;
+        YSupTop = -495;
+
+        scrollLandWidth1 = 1890;
+        scrollLandWidth2 = 1260;
+
+        AbsolutYSupBotScroll = -165;
+        AbsolutYGenTopScroll = -495;
+        AbsolutYSupTopScroll = 112;
+
+        AbsolutXGenRightScroll = 210;
+        AbsolutXSupRightScroll = -70;
+        AbsolutXGenLeftScroll = -265;
+        AbsolutXSupLeftScroll = 40;
+
+        resetScroll = 630;
+    }
+}
+screenSize();
 
 /*pour faire défiler desbout de chunk plus gros*/
 let YSixChunk = false;
@@ -48,15 +104,15 @@ let BigScrollLand;
 
 /* changement de la largeur du render 3d en fonction de l'affichage des chunks */
 function changeWidthScrollLand(){
-    if (BigScrollLand == true){ /*945*/
-        scrollLand.style.width = "1890px";
-        scrollLand.style.maxWidth = "1890px";
-        scrollLand.style.minWidth = "1890px";
+    if (BigScrollLand == true){ /*mobile = 945*/ /*laptop = 1890*/
+        scrollLand.style.width = scrollLandWidth1 + "px";
+        scrollLand.style.maxWidth = scrollLandWidth1 + "px";
+        scrollLand.style.minWidth = scrollLandWidth1 + "px";
     }
-    else{ /*630*/
-        scrollLand.style.width = "1260px";
-        scrollLand.style.maxWidth = "1260px";
-        scrollLand.style.minWidth = "1260px";
+    else{ /* mobile = 630*/ /*laptop = 1260*/ 
+        scrollLand.style.width = scrollLandWidth2 + "px";
+        scrollLand.style.maxWidth = scrollLandWidth2 + "px";
+        scrollLand.style.minWidth = scrollLandWidth2 + "px";
     }
 }
 
@@ -82,7 +138,7 @@ function changementChunk(){
             genActualChunk();
             YSupBot = YSupBot + resetScroll;
             YGenBot = position.inGame.y - 2;
-            position.html.y = -165;
+            position.html.y = AbsolutYSupBotScroll;
             YSixChunk = false;
         }
         //generation yTop
@@ -94,7 +150,7 @@ function changementChunk(){
             genActualChunk();
             YGenTop = YGenTop + resetScroll;
             YSupTop = position.inGame.y - 2;
-            position.html.y = -495;
+            position.html.y = AbsolutYGenTopScroll;
             YSixChunk = true;
         }       
         //suppression ytop
@@ -105,7 +161,7 @@ function changementChunk(){
             genActualChunk();
             YSupTop = YSupTop + (-resetScroll);
             YGenTop = position.inGame.y + 2;
-            position.html.y = 112;
+            position.html.y = AbsolutYSupTopScroll;
             YSixChunk = false;
         }   
     // AXE X
@@ -121,7 +177,7 @@ function changementChunk(){
             changeWidthScrollLand()
             XGenRight = XGenRight  + (-resetScroll);
             XSupRight = position.inGame.x + 2;
-            position.html.x = 210;
+            position.html.x = AbsolutXGenRightScroll;
             XSixChunk = true;
         }
         //suppression xRight
@@ -134,7 +190,7 @@ function changementChunk(){
             changeWidthScrollLand()
             XSupRight = XSupRight  + resetScroll;
             XGenRight = position.inGame.x - 2;
-            position.html.x = -70;
+            position.html.x = AbsolutXSupRightScroll;
             XSixChunk = false;
         }
         //Generation xleft
@@ -151,7 +207,7 @@ function changementChunk(){
 
             XGenLeft = XGenLeft  + resetScroll;
             XSupLeft = position.inGame.x - 2;
-            position.html.x = -265;
+            position.html.x = AbsolutXGenLeftScroll;
             XSixChunk = true;
         }
         //suppression xleft
@@ -165,7 +221,7 @@ function changementChunk(){
 
             XSupLeft = XSupLeft  + (-resetScroll);
             XGenLeft = position.inGame.x + 2;
-            position.html.x = 40;
+            position.html.x = AbsolutXSupLeftScroll;
             XSixChunk = false;
         }
     //if ChunkRepro[] >= 6 && XSix||YSix == true
@@ -188,7 +244,7 @@ function changementChunk(){
             genActualChunk();
             YSupBot = YSupBot + resetScroll;
             YGenBot = position.inGame.y - 3;
-            position.html.y = -165;
+            position.html.y = AbsolutYSupBotScroll;
         }
         //generation YTOP
         if (position.inGame.y >= YGenTop){
@@ -199,7 +255,7 @@ function changementChunk(){
             genActualChunk();
             YGenTop = YGenTop + resetScroll;
             YSupTop = position.inGame.y - 3;
-            position.html.y = -495;
+            position.html.y = AbsolutYGenTopScroll;
         }   
         //SUPP YTOP
         if (position.inGame.y <= YSupTop){
@@ -209,7 +265,7 @@ function changementChunk(){
             genActualChunk();
             YSupTop = YSupTop + (-resetScroll);
             YGenTop = position.inGame.y + 3;
-            position.html.y = 112;
+            position.html.y = AbsolutYSupTopScroll;
         }   
         //generation xRight
         if (position.inGame.x <= XGenRight){
@@ -225,7 +281,7 @@ function changementChunk(){
             changeWidthScrollLand()
             XGenRight = XGenRight  + (-resetScroll);
             XSupRight = position.inGame.x + 2;
-            position.html.x = 220;
+            position.html.x = AbsolutXGenRightScroll;
         }
         //suppression xRight
         if (position.inGame.x >= XSupRight){
@@ -238,7 +294,7 @@ function changementChunk(){
             changeWidthScrollLand()
             XSupRight = XSupRight  + resetScroll;
             XGenRight = position.inGame.x - 3;
-            position.html.x = -95;
+            position.html.x = AbsolutXSupRightScroll;
         }
         //Generation xleft
         if (position.inGame.x >= XGenLeft){
@@ -255,7 +311,7 @@ function changementChunk(){
 
             XGenLeft = XGenLeft  + resetScroll;
             XSupLeft = position.inGame.x - 3;
-            position.html.x = -260;
+            position.html.x = AbsolutXGenLeftScroll;
         }
         //suppression xleft
         if (position.inGame.x <= XSupLeft){
@@ -269,7 +325,7 @@ function changementChunk(){
 
             XSupLeft = XSupLeft  + (-resetScroll);
             XGenLeft = position.inGame.x + 3;
-            position.html.x = 40;
+            position.html.x = AbsolutXSupLeftScroll;
         }            
     }
 }
@@ -298,6 +354,7 @@ function verifControlLoop(){
     }
     scrollLand.style.transform = base3dScroll + "translate("+ position.html.x + "px, " + position.html.y + "px)";
 }
+let gameLoop = setInterval(verifControlLoop, 20);
 
 /*écoute du clavier */
 body.addEventListener('keydown', move);
@@ -385,6 +442,5 @@ function topMoveOffP(){
     keyState.right = false;
     keyState.down = false;
 }
-let gameLoop = setInterval(verifControlLoop, 20);
 
 

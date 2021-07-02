@@ -42,7 +42,7 @@ body {
 }
 
 .side {
-  background-color: rgba(0, 0, 0, 0.207);
+  background-color: black;
   position: relative;
   z-index: 100;
   width: 100%;

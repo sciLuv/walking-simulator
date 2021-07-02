@@ -26,21 +26,38 @@ let scrollLandWidth1, scrollLandWidth2 = 1260;
 let AbsolutYSupBotScroll, AbsolutYGenTopScroll, AbsolutYSupTopScroll;
 let AbsolutXGenRightScroll, AbsolutXSupRightScroll, AbsolutXGenLeftScroll, AbsolutXSupLeftScroll;
 
+/*pour faire défiler desbout de chunk plus gros*/
+let YSixChunk = false;
+let XSixChunk = false;
+
+/*état des touche initial*/
+let keyState = { 
+    up : false, 
+    down : false, 
+    left : false, 
+    right : false
+};
+let movingSpeed;
+
+/* vérifie les dimension de largeur du render 3d html, pour le scrolling horizontal */
+let BigScrollLand;
+
+
 function screenSize(){
     let actualScreen = window.screen.width;
     console.log(actualScreen);
     if(actualScreen <= 635){
         XGenLeft = 14;
-        XSupLeft = -580;
+        XSupLeft = -300;
         
         XGenRight = -48;
-        XSupRight = 610;
+        XSupRight = 262;
         
         YGenBot = -93;
-        YSupBot = 588;
+        YSupBot = 224;
         
         YGenTop = 45;
-        YSupTop = -533; 
+        YSupTop = -264; 
 
         scrollLandWidth1 = 945;
         scrollLandWidth2 = 630;
@@ -55,6 +72,7 @@ function screenSize(){
         AbsolutXSupLeftScroll = 20;
 
         resetScroll = 315;
+        movingSpeed = 2;
     }
     else{
         XGenLeft = 40;
@@ -82,25 +100,12 @@ function screenSize(){
         AbsolutXSupLeftScroll = 40;
 
         resetScroll = 630;
+        movingSpeed = 4;
     }
 }
 screenSize();
 
-/*pour faire défiler desbout de chunk plus gros*/
-let YSixChunk = false;
-let XSixChunk = false;
 
-/*état des touche initial*/
-let keyState = { 
-    up : false, 
-    down : false, 
-    left : false, 
-    right : false
-};
-let movingSpeed = 4;
-
-/* vérifie les dimension de largeur du render 3d html, pour le scrolling horizontal */
-let BigScrollLand;
 
 /* changement de la largeur du render 3d en fonction de l'affichage des chunks */
 function changeWidthScrollLand(){
@@ -121,6 +126,7 @@ function changementChunk(){
     //AXE Y
         //generation ybottom
         if ((position.inGame.y <= YGenBot)&&(actualChunksRepro.length == 4)){
+            console.log("test2");
             for( i = 0; i < 2; i++){
                 actualChunksRepro.push(chunkID);
                 chunkID++
@@ -132,6 +138,7 @@ function changementChunk(){
         }
         //suppression ybottom
         if ((position.inGame.y >= YSupBot)&&(actualChunksRepro.length == 6)){
+            console.log("test3");
             for(i=0; i<=1; i++){ 
                 actualChunksRepro.pop();
             }
@@ -143,6 +150,7 @@ function changementChunk(){
         }
         //generation yTop
         if ((position.inGame.y >= YGenTop)&&(actualChunksRepro.length == 4)){
+            console.log("test4");
             for( i = 0; i < 2; i++){
                 actualChunksRepro.unshift(chunkID);
                 chunkID++
@@ -155,6 +163,7 @@ function changementChunk(){
         }       
         //suppression ytop
         if ((position.inGame.y <= YSupTop)&&(actualChunksRepro.length == 6)){
+            console.log("test");
             for(i=0; i<=1; i++){ 
                 actualChunksRepro.shift();
             }
@@ -167,6 +176,7 @@ function changementChunk(){
     // AXE X
         //generation xRight
         if ((position.inGame.x <= XGenRight)&&(actualChunksRepro.length == 4)){
+            console.log("test5");
             actualChunksRepro.splice(2, 0, chunkID);
             chunkID ++;
             actualChunksRepro.push(chunkID);
@@ -182,6 +192,7 @@ function changementChunk(){
         }
         //suppression xRight
         if ((position.inGame.x >= XSupRight)&&(actualChunksRepro.length == 6)){
+            console.log("test6");
             actualChunksRepro.splice(((actualChunksRepro.length/2)-1), 1);
             actualChunksRepro.pop();
 
@@ -195,6 +206,7 @@ function changementChunk(){
         }
         //Generation xleft
         if ((position.inGame.x >= XGenLeft)&&(actualChunksRepro.length == 4)){
+            console.log("test7");
             chunkID ++;
             actualChunksRepro.splice(((actualChunksRepro.length/2)), 0, chunkID);
             chunkID --;
@@ -212,6 +224,7 @@ function changementChunk(){
         }
         //suppression xleft
         if ((position.inGame.x <= XSupLeft)&&(actualChunksRepro.length == 6)){
+            console.log("test8");
             actualChunksRepro.splice((actualChunksRepro.length/2), 1);
             actualChunksRepro.shift();
 
@@ -228,6 +241,7 @@ function changementChunk(){
     if((actualChunksRepro.length >= 6)&&(XSixChunk == true)||(YSixChunk == true)){
         //generation YBOT
         if (position.inGame.y <= YGenBot){
+            console.log("TEST1");
             for( i = 0; i < 3; i++){
                 actualChunksRepro.push(chunkID);
                 chunkID++
@@ -238,6 +252,7 @@ function changementChunk(){
         }
         //SUPP YBOT
         if (position.inGame.y >= YSupBot){
+            console.log("TEST2");
             for( i = 0; i < 3; i++){ 
                 actualChunksRepro.pop();
             }
@@ -248,6 +263,7 @@ function changementChunk(){
         }
         //generation YTOP
         if (position.inGame.y >= YGenTop){
+            console.log("TEST3");
             for( i = 0; i < 3; i++){
                 actualChunksRepro.unshift(chunkID);
                 chunkID++
@@ -259,6 +275,7 @@ function changementChunk(){
         }   
         //SUPP YTOP
         if (position.inGame.y <= YSupTop){
+            console.log("TEST4");
             for( i = 0; i < 3; i++){ 
                 actualChunksRepro.shift();
             }
@@ -269,6 +286,7 @@ function changementChunk(){
         }   
         //generation xRight
         if (position.inGame.x <= XGenRight){
+            console.log("TEST5");
             actualChunksRepro.splice(2, 0, chunkID);
             chunkID ++;
             actualChunksRepro.splice(5, 0, chunkID);
@@ -285,6 +303,7 @@ function changementChunk(){
         }
         //suppression xRight
         if (position.inGame.x >= XSupRight){
+            console.log("TEST6");
             actualChunksRepro.splice(2, 1);
             actualChunksRepro.splice(4, 1);
             actualChunksRepro.pop();
@@ -298,6 +317,7 @@ function changementChunk(){
         }
         //Generation xleft
         if (position.inGame.x >= XGenLeft){
+            console.log("TEST7");
             actualChunksRepro.splice(0, 0, chunkID);
             chunkID ++;
             actualChunksRepro.splice(3, 0, chunkID);
@@ -315,6 +335,7 @@ function changementChunk(){
         }
         //suppression xleft
         if (position.inGame.x <= XSupLeft){
+            console.log("TEST8");
             actualChunksRepro.shift();
             actualChunksRepro.splice(2, 1);
             actualChunksRepro.splice(4, 1);

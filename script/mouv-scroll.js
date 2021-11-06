@@ -16,13 +16,16 @@ let position = {
     html : {x: 0, y: 0}
 }
 
-let XGenLeft, XSupLeft, XGenRight, XSupRight; 
-let YGenBot, YSupBot, YGenTop, YSupTop; 
+//mettre les variables des lignes 20 et 21 dans des objets 
+let XGenLeft, XGenRight, XSupLeft, XSupRight; 
+let YGenBot, YSupBot, YGenTop, YSupTop;
 
 let resetScroll;
 
 let scrollLandWidth1, scrollLandWidth2 = 1260;
 
+//Les variables qui contiendrons les valeurs nécessaire au bon déroullement du scrolling
+//il s'agit de valeurs numérique qui correspondent a des placement, de création ou suppréssion.
 let AbsolutYSupBotScroll, AbsolutYGenTopScroll, AbsolutYSupTopScroll;
 let AbsolutXGenRightScroll, AbsolutXSupRightScroll, AbsolutXGenLeftScroll, AbsolutXSupLeftScroll;
 
@@ -44,7 +47,7 @@ let BigScrollLand;
 
 
 function screenSize(){
-    let actualScreen = window.screen.width;
+    let actualScreen = window.innerWidth;
     console.log(actualScreen);
     if(actualScreen <= 635){
         XGenLeft = 14;
@@ -123,10 +126,11 @@ function changeWidthScrollLand(){
 
 function changementChunk(){
     //if ChunkRepro[] <= 6
+    //c'est a dire si le nombre de chunk affiché est de moins de 6 chunks.
     //AXE Y
         //generation ybottom
         if ((position.inGame.y <= YGenBot)&&(actualChunksRepro.length == 4)){
-            console.log("test2");
+            console.log("ChunkRepro[] <= 6 : GEN YBOT");
             for( i = 0; i < 2; i++){
                 actualChunksRepro.push(chunkID);
                 chunkID++
@@ -138,7 +142,7 @@ function changementChunk(){
         }
         //suppression ybottom
         if ((position.inGame.y >= YSupBot)&&(actualChunksRepro.length == 6)){
-            console.log("test3");
+            console.log("ChunkRepro[] <= 6 : SUP YBOT");
             for(i=0; i<=1; i++){ 
                 actualChunksRepro.pop();
             }
@@ -150,7 +154,7 @@ function changementChunk(){
         }
         //generation yTop
         if ((position.inGame.y >= YGenTop)&&(actualChunksRepro.length == 4)){
-            console.log("test4");
+            console.log("ChunkRepro[] <= 6 : GEN YTOP");
             for( i = 0; i < 2; i++){
                 actualChunksRepro.unshift(chunkID);
                 chunkID++
@@ -163,7 +167,7 @@ function changementChunk(){
         }       
         //suppression ytop
         if ((position.inGame.y <= YSupTop)&&(actualChunksRepro.length == 6)){
-            console.log("test");
+            console.log("ChunkRepro[] <= 6 : SUP YTOP");
             for(i=0; i<=1; i++){ 
                 actualChunksRepro.shift();
             }
@@ -176,7 +180,7 @@ function changementChunk(){
     // AXE X
         //generation xRight
         if ((position.inGame.x <= XGenRight)&&(actualChunksRepro.length == 4)){
-            console.log("test5");
+            console.log("ChunkRepro[] <= 6 : GEN XRIGHT");
             actualChunksRepro.splice(2, 0, chunkID);
             chunkID ++;
             actualChunksRepro.push(chunkID);
@@ -192,7 +196,7 @@ function changementChunk(){
         }
         //suppression xRight
         if ((position.inGame.x >= XSupRight)&&(actualChunksRepro.length == 6)){
-            console.log("test6");
+            console.log("ChunkRepro[] <= 6 : SUP XRIGHT");
             actualChunksRepro.splice(((actualChunksRepro.length/2)-1), 1);
             actualChunksRepro.pop();
 
@@ -206,7 +210,7 @@ function changementChunk(){
         }
         //Generation xleft
         if ((position.inGame.x >= XGenLeft)&&(actualChunksRepro.length == 4)){
-            console.log("test7");
+            console.log("ChunkRepro[] <= 6 : SUP XRIGHT");
             chunkID ++;
             actualChunksRepro.splice(((actualChunksRepro.length/2)), 0, chunkID);
             chunkID --;
@@ -224,7 +228,7 @@ function changementChunk(){
         }
         //suppression xleft
         if ((position.inGame.x <= XSupLeft)&&(actualChunksRepro.length == 6)){
-            console.log("test8");
+            console.log("ChunkRepro[] <= 6 : SUP XLEFT");
             actualChunksRepro.splice((actualChunksRepro.length/2), 1);
             actualChunksRepro.shift();
 
@@ -238,10 +242,11 @@ function changementChunk(){
             XSixChunk = false;
         }
     //if ChunkRepro[] >= 6 && XSix||YSix == true
+    //c'est a dire si le nombre de chunk affiché est de 6 chunks ou plus.
     if((actualChunksRepro.length >= 6)&&(XSixChunk == true)||(YSixChunk == true)){
         //generation YBOT
         if (position.inGame.y <= YGenBot){
-            console.log("TEST1");
+            console.log("ChunkRepro[] >= 6 : GEN YBOT");
             for( i = 0; i < 3; i++){
                 actualChunksRepro.push(chunkID);
                 chunkID++
@@ -250,9 +255,9 @@ function changementChunk(){
             YGenBot = YGenBot + (-resetScroll); 
             YSupBot = position.inGame.y + (+3);
         }
-        //SUPP YBOT
+        //suppression YBOT
         if (position.inGame.y >= YSupBot){
-            console.log("TEST2");
+            console.log("ChunkRepro[] >= 6 : SUP YBOT");
             for( i = 0; i < 3; i++){ 
                 actualChunksRepro.pop();
             }
@@ -263,7 +268,7 @@ function changementChunk(){
         }
         //generation YTOP
         if (position.inGame.y >= YGenTop){
-            console.log("TEST3");
+            console.log("ChunkRepro[] >= 6 : GEN YTOP");
             for( i = 0; i < 3; i++){
                 actualChunksRepro.unshift(chunkID);
                 chunkID++
@@ -273,9 +278,9 @@ function changementChunk(){
             YSupTop = position.inGame.y - 3;
             position.html.y = AbsolutYGenTopScroll;
         }   
-        //SUPP YTOP
+        //suppression YTOP
         if (position.inGame.y <= YSupTop){
-            console.log("TEST4");
+            console.log("ChunkRepro[] >= 6 : SUP YTOP");
             for( i = 0; i < 3; i++){ 
                 actualChunksRepro.shift();
             }
@@ -286,7 +291,7 @@ function changementChunk(){
         }   
         //generation xRight
         if (position.inGame.x <= XGenRight){
-            console.log("TEST5");
+            console.log("ChunkRepro[] >= 6 : GEN XRIGHT");
             actualChunksRepro.splice(2, 0, chunkID);
             chunkID ++;
             actualChunksRepro.splice(5, 0, chunkID);
@@ -303,7 +308,7 @@ function changementChunk(){
         }
         //suppression xRight
         if (position.inGame.x >= XSupRight){
-            console.log("TEST6");
+            console.log("ChunkRepro[] >= 6 : SUP XRIGHT");
             actualChunksRepro.splice(2, 1);
             actualChunksRepro.splice(4, 1);
             actualChunksRepro.pop();
@@ -317,7 +322,7 @@ function changementChunk(){
         }
         //Generation xleft
         if (position.inGame.x >= XGenLeft){
-            console.log("TEST7");
+            console.log("ChunkRepro[] >= 6 : GEN XLEFT");
             actualChunksRepro.splice(0, 0, chunkID);
             chunkID ++;
             actualChunksRepro.splice(3, 0, chunkID);
@@ -335,7 +340,7 @@ function changementChunk(){
         }
         //suppression xleft
         if (position.inGame.x <= XSupLeft){
-            console.log("TEST8");
+            console.log("ChunkRepro[] >= 6 : SUP XLEFT");
             actualChunksRepro.shift();
             actualChunksRepro.splice(2, 1);
             actualChunksRepro.splice(4, 1);

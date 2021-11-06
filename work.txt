@@ -1,12 +1,11 @@
-adapté le JS au mobile (distance XY et taille de l'interface en fonction de la taille de l'écran)
-adapté les arbre ect au mobile
-
 ajusté les resets de scrolling pour le moins de saccade possible
 empécher le fait d'utiliser deux touche de mouvement en meme temps
 
 réglé le bug de la chunklist qui contient tout les chunk (fonctionne actuellement, mais plus tard il faudra une liste des chunk a l'écran et une liste des
 chunk généré, de préférence mis dans un fichier serveur)
 
-réorganiser le dossier des images
-
 ensuite faire le perso
+
+puis la sauvgarde de la génération.
+
+une fois ca fait taffé sur le generateur de forme 3d

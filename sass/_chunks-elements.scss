@@ -1,7 +1,7 @@
 .weed{
     height: 100%;
     width: 100%;
-    background-image: url(../image/weed.png);
+    background-image: url(../image/ingame/weed.png);
     background-size: contain;
     position: relative;
     z-index: -1;
@@ -13,7 +13,7 @@
 .weed-2{
     height: 100%;
     width: 100%;
-    background-image: url(../image/weed2.png);
+    background-image: url(../image/ingame/weed2.png);
     background-size: contain;
     position: relative;
     z-index: +1;
@@ -22,7 +22,7 @@
 .tree{
     width: 100%;
     height: 100%;
-    background-image: url(../image/tree.png);
+    background-image: url(../image/ingame/tree.png);
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
@@ -35,7 +35,7 @@
 .tree-2{
     width: 100%;
     height: 100%;
-    background-image: url(../image/tree2.png);
+    background-image: url(../image/ingame/tree2.png);
     background-size: contain;
     background-repeat: no-repeat;
     position: relative;
